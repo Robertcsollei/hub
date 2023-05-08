@@ -11,7 +11,7 @@
 #define AWS_IOT_SUBSCRIBE_TOPIC "esp32/sub"
 
 WiFiClientSecure net = WiFiClientSecure();
-PubSubClient client(net);
+PubSubClient awsClient(net);
 
 void messageHandler(char *topic, byte *payload, unsigned int length)
 {
@@ -33,27 +33,27 @@ void connectAWS()
     net.setPrivateKey(AWS_CERT_PRIVATE);
 
     // Connect to the MQTT broker on the AWS endpoint we defined earlier
-    client.setServer(AWS_IOT_ENDPOINT, 8883);
+    awsClient.setServer(AWS_IOT_ENDPOINT, 8883);
 
     // Create a message handler
-    client.setCallback(messageHandler);
+    awsClient.setCallback(messageHandler);
 
     Serial.println("Connecting to AWS IOT");
 
-    while (!client.connect(THING_NAME))
+    while (!awsClient.connect(THING_NAME))
     {
         Serial.print(".");
         delay(100);
     }
 
-    if (!client.connected())
+    if (!awsClient.connected())
     {
         Serial.println("AWS IoT Timeout!");
         return;
     }
 
     // Subscribe to a topic
-    client.subscribe(AWS_IOT_SUBSCRIBE_TOPIC);
+    awsClient.subscribe(AWS_IOT_SUBSCRIBE_TOPIC);
 
     Serial.println("AWS IoT Connected!");
 }
@@ -66,7 +66,7 @@ void publishAWSMessage()
     char jsonBuffer[512];
     serializeJson(doc, jsonBuffer); // print to client
 
-    client.publish(AWS_IOT_PUBLISH_TOPIC, jsonBuffer);
+    awsClient.publish(AWS_IOT_PUBLISH_TOPIC, jsonBuffer);
 }
 
 #endif
