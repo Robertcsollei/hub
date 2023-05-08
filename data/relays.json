@@ -1,0 +1,35 @@
+[
+    {
+        "pin": 25,
+        "state": false,
+        "name": "Pump"
+    },  {
+        "pin": 15,
+        "state": false,
+        "name": "A"
+    }, {
+        "pin": 13,
+        "state": false,
+        "name": "B"
+    }, {
+        "pin": 4,
+        "state": false,
+        "name": "C"
+    }, {
+        "pin": 5,
+        "state": false,
+        "name": "D"
+    }, {
+        "pin": 18,
+        "state": false,
+        "name": "E"
+    }, {
+        "pin": 19,
+        "state": false,
+        "name": "F"
+    }, {
+        "pin": 23,
+        "state": false,
+        "name": "G"
+    }
+]
