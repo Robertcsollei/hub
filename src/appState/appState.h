@@ -17,21 +17,24 @@ public:
         return instance;
     }
     RelaySchema relays;
+    char ssid[25];
+    char password[25];
+    char port[25];
 
 private:
     XFS fs;
     AppState()
     {
-        Serial.println("Reading file");
+        Serial.println("Initializing App State...");
         LoadedData file = fs.load("/relays.json");
-        Serial.println(file.data);
         DynamicJsonDocument doc(file.size);
         auto error = deserializeJson(doc, file.data);
         if (error)
         {
             Serial.println("Failed to read file, using default configuration");
         }
-        Serial.println("Initing AppState Done");
+        Serial.println("App State Initialized!");
+        // TODO fill relays with the incoming data from relays.json
         delete file.data;
     };
     AppState(AppState const &) = delete;
