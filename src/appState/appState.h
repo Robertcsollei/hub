@@ -16,6 +16,7 @@ public:
         static AppState instance;
         return instance;
     }
+    
     RelaySchema relays;
     char ssid[25];
     char password[25];
